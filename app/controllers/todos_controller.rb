@@ -36,9 +36,11 @@ class TodosController < ApplicationController
         format.html { redirect_to todo_url(@todo), notice: "Todo was successfully created." }
         format.json { render :show, status: :created, location: @todo }
       else
+        flash.now[:alert] = "Todo was not created - #{@todo.errors.first.full_message}"
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.update('new-todo', partial: 'todos/form', locals: { todo: @todo })
+            turbo_stream.update('new-todo', partial: 'todos/form', locals: { todo: @todo }),
+            turbo_stream.prepend('flash', partial: 'layouts/flash')
           ]
         end
         format.html { render :new, status: :unprocessable_entity }
