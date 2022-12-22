@@ -1,8 +1,10 @@
-<div id="<%= dom_id post %>" class='row table-row'>
-  <div class='col'><%= post.id %></div>
-  <div class='col'><%= post.title %></div>
-  <div class='col d-flex justify-content-center align-items-center'>
-    <%= link_to '<i class="fa-solid fa-pencil"></i>'.html_safe, edit_post_path(post), class: 'btn btn-primary btn-sm mx-1' %>
-    <%= button_to '<i class="fa-solid fa-trash"></i>'.html_safe, post, method: :delete, class: 'btn btn-danger btn-sm mx-1' %>
+<%= turbo_frame_tag post, class: 'post' do %>
+  <div id="<%= dom_id post %>" class='row table-row'>
+    <div class='col'><%= post.id %></div>
+    <div class='col'><%= post.title %></div>
+    <div class='col d-flex justify-content-center align-items-center'>
+      <%= link_to '<i class="fa-solid fa-pencil"></i>'.html_safe, edit_post_path(post), class: 'btn btn-primary btn-sm mx-1' %>
+      <%= button_to '<i class="fa-solid fa-trash"></i>'.html_safe, post, method: :delete, class: 'btn btn-danger btn-sm mx-1' %>
+    </div>
   </div>
-</div>
+<% end %>

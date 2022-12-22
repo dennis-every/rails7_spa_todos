@@ -8,12 +8,10 @@
     <header class='table-head row'>
       <div class='col'>#</div>
       <div class='col'>Post</div>
-      <div class='col'>#</div>
+      <div class='col'></div>
     </header>
     <div class='table-body row'>
-      <div id='new-post'>
-        <%= render partial: 'posts/form', locals: { post: Post.new } %>
-      </div>
+      <%= turbo_frame_tag 'new-post', src: new_post_path %>
       <div id='posts'>
         <%= render @posts %>      
       </div>

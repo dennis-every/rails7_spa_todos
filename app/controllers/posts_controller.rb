@@ -46,6 +46,13 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
+        flash.now['notice'] = "Post #{@post.id} updated at #{Time.zone.now.strftime('%H:%M:%S - %b %e,  %Y')}"
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.prepend('flash', partial: 'layouts/flash'),
+            turbo_stream.replace(@post, @post)
+          ]
+        end
         format.html { redirect_to post_url(@post), notice: "Post was successfully updated." }
         format.json { render :show, status: :ok, location: @post }
       else
