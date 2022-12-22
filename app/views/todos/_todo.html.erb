@@ -1,4 +1,5 @@
 <tr id="<%= dom_id todo %>">
+  <td><%= todo.id %></td>
   <td><%= todo.title %></td>
-  <td class="text-center">X</td>
+  <td class="text-center"><%= button_to 'X', todo, method: :delete, class: 'btn btn-danger btn-sm' %></td>
 </tr>

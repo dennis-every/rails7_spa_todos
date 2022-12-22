@@ -67,6 +67,13 @@ class TodosController < ApplicationController
     @todo.destroy
 
     respond_to do |format|
+      flash.now[:notice] = "Todo #{@todo.id} was successfully removed"
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.prepend('flash', partial: 'layouts/flash'),
+          turbo_stream.remove("todo_#{@todo.id}")
+        ]
+      end
       format.html { redirect_to todos_url, notice: "Todo was successfully destroyed." }
       format.json { head :no_content }
     end
