@@ -14,6 +14,9 @@
   <body>
     <header class='text-center alert alert-primary'><%= Time.zone.now %></header>
     <main class="container">
+      <section id='flash'>
+        <%= render partial: 'layouts/flash' %>
+      </section>
       <%= yield %>
     </main>
   </body>

@@ -25,10 +25,12 @@ class TodosController < ApplicationController
 
     respond_to do |format|
       if @todo.save
+        flash.now[:notice] = "Todo created at #{Time.zone.now.strftime('%H:%M:%S - %b %e,  %Y')}"
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.update('new-todo', partial: 'todos/form', locals: { todo: Todo.new }),
-            turbo_stream.prepend('todos', partial: 'todos/todo', locals: { todo: @todo })
+            turbo_stream.prepend('todos', partial: 'todos/todo', locals: { todo: @todo }),
+            turbo_stream.update('flash', partial: 'layouts/flash')
           ]
         end
         format.html { redirect_to todo_url(@todo), notice: "Todo was successfully created." }
