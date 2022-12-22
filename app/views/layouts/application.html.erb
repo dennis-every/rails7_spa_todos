@@ -19,7 +19,7 @@
   </head>
 
   <body>
-    <header class='text-center alert alert-primary'><%= Time.zone.now %></header>
+    <header class='text-center alert alert-primary'><%= Time.zone.now.strftime('%H:%M:%S - %b %e,  %Y') %></header>
     <main class="container">
       <section id='flash'>
         <%= render partial: 'layouts/flash' %>

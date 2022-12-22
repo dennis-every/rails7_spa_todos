@@ -1,5 +1,5 @@
-<%= form_with(model: post, id: dom_id(post, 'form')) do |form| %>
-    <td><%= form.object.persisted? ? form.object.id : 'new' %></td>
-    <td><%= form.text_field :title, class: 'form-control' %></td>
-    <td class='text-center'><%= form.submit 'Add Post', class: 'btn btn-primary' %></td>
+<%= form_with(model: post, id: dom_id(post, 'form'), class: 'table-row row') do |form| %>
+  <div class='col'><%= form.object.persisted? ? form.object.id : 'new' %></div>
+  <div class='col'><%= form.text_field :title, class: 'form-control' %></div>
+  <div class='col text-center'><%= form.submit 'Add Post', class: 'btn btn-primary' %></div>
 <% end %>

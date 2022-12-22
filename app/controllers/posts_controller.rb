@@ -24,12 +24,12 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
 
     respond_to do |format|
-      flash.now[:notice] = "Post #{@post.id} added at #{Time.zone.now.strftime('%H:%M:%S - %b %e,  %Y')}"
       if @post.save
+        flash.now[:notice] = "Post #{@post.id} added at #{Time.zone.now.strftime('%H:%M:%S - %b %e,  %Y')}"
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.prepend('posts', partial: 'posts/post', locals: {post: @post}),
-            # turbo_stream.prepend('new-post', partial: 'posts/form', locals: {post: Post.new}),
+            turbo_stream.update('new-post', partial: 'posts/form', locals: {post: Post.new}),
             turbo_stream.prepend('flash', partial: 'layouts/flash')
           ]
         end

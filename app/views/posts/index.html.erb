@@ -1,23 +1,23 @@
-<div class="my-5 ">
-  <div>
+<section id='posts-section' class='mt-3'>
+  
+  <header>
     <h1>Posts</h1>
-  </div>
-  <table class='table table-bordered table-striped'>
-    <thead class="table-dark">
-      <tr>
-        <th>#</th>
-        <th>Title</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody style="border: 1px solid red;">
-      <tr id='new-post'>    
-        <%= render partial: 'posts/form', locals: { post: Post.new } %>        
-      </tr>
-    </tbody>  
-    <tbody id='posts' style="border: 1px solid blue;">
-      <%= render @posts %>      
-    </tbody>
-  </table>
-  </div>
-</div>
+  </header>
+
+  <main class='table'>
+    <header class='table-head row'>
+      <div class='col'>#</div>
+      <div class='col'>Post</div>
+      <div class='col'>#</div>
+    </header>
+    <div class='table-body row'>
+      <div id='new-post'>
+        <%= render partial: 'posts/form', locals: { post: Post.new } %>
+      </div>
+      <div id='posts'>
+        <%= render @posts %>      
+      </div>
+    </div>
+  </main>
+
+</section>
