@@ -27,6 +27,7 @@ class TodosController < ApplicationController
       if @todo.save
         format.turbo_stream do
           render turbo_stream: [
+            turbo_stream.update('new-todo', partial: 'todos/form', locals: { todo: Todo.new }),
             turbo_stream.prepend('todos', partial: 'todos/todo', locals: { todo: @todo })
           ]
         end
