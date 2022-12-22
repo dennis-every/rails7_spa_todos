@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.order(created_at: :desc)
   end
 
   # GET /posts/1 or /posts/1.json
@@ -24,7 +24,15 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
 
     respond_to do |format|
+      flash.now[:notice] = "Post #{@post.id} added at #{Time.zone.now.strftime('%H:%M:%S - %b %e,  %Y')}"
       if @post.save
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.prepend('posts', partial: 'posts/post', locals: {post: @post}),
+            # turbo_stream.prepend('new-post', partial: 'posts/form', locals: {post: Post.new}),
+            turbo_stream.prepend('flash', partial: 'layouts/flash')
+          ]
+        end
         format.html { redirect_to post_url(@post), notice: "Post was successfully created." }
         format.json { render :show, status: :created, location: @post }
       else
@@ -52,6 +60,13 @@ class PostsController < ApplicationController
     @post.destroy
 
     respond_to do |format|
+      flash.now[:notice] = "Post #{@post.id} successfully removed"
+      format.turbo_stream do 
+        render turbo_stream: [
+          turbo_stream.prepend('flash', partial: 'layouts/flash'),
+          turbo_stream.remove("post_#{@post.id}")
+        ]
+      end
       format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
       format.json { head :no_content }
     end

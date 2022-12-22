@@ -1,12 +1,8 @@
-<div id="<%= dom_id post %>">
-  <p>
-    <strong>Title:</strong>
-    <%= post.title %>
-  </p>
-
-  <p>
-    <strong>Body:</strong>
-    <%= post.body %>
-  </p>
-
-</div>
+<tr id="<%= dom_id post %>">
+  <td><%= post.id %></td>
+  <td><%= post.title %></td>
+  <td class='d-flex justify-content-center align-items-center'>
+    <%= link_to '<i class="fa-solid fa-pencil"></i>'.html_safe, edit_post_path(post), class: 'btn btn-primary btn-sm mx-1' %>
+    <%= button_to '<i class="fa-solid fa-trash"></i>'.html_safe, post, method: :delete, class: 'btn btn-danger btn-sm mx-1' %>
+  </td>
+</tr>

@@ -1,14 +1,23 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Posts</h1>
-
-<div id="posts">
-  <% @posts.each do |post| %>
-    <%= render post %>
-    <p>
-      <%= link_to "Show this post", post %>
-    </p>
-  <% end %>
+<div class="my-5 ">
+  <div>
+    <h1>Posts</h1>
+  </div>
+  <table class='table table-bordered table-striped'>
+    <thead class="table-dark">
+      <tr>
+        <th>#</th>
+        <th>Title</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody style="border: 1px solid red;">
+      <tr id='new-post'>    
+        <%= render partial: 'posts/form', locals: { post: Post.new } %>        
+      </tr>
+    </tbody>  
+    <tbody id='posts' style="border: 1px solid blue;">
+      <%= render @posts %>      
+    </tbody>
+  </table>
+  </div>
 </div>
-
-<%= link_to "New post", new_post_path %>
