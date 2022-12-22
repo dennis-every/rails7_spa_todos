@@ -1,5 +1,5 @@
-<div class='row mt-5'>
-  <section id='todos' class='col'>
+<div class='row my-5'>
+  <section class='col'>
     <h1>Todos</h1>
     <table class='table table-bordered table-striped'>
       <thead>
@@ -8,15 +8,16 @@
           <th></th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id='todos'>
         <% @todos.each do |todo| %>          
           <%= render todo %>
         <% end %>
       </tbody>
     </table>
   </section>
-  <section id='new-todo' class='col d-flex justify-content-center align-items-center'>
-    <%= link_to "New todo", new_todo_path, class:'btn btn-primary' %>
+  <section id='new-todo' class='col'>
+    <h1>Add Todo</h1>
+    <%= render partial: 'todos/form', locals: { todo: Todo.new } %>
   </section>
 </div>
 

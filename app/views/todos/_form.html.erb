@@ -11,12 +11,11 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+  <div class='mb-2'>
+    <%= form.text_field :title, class:'form-control', placeholder: 'Enter new todo item...' %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class='text-end'>
+    <%= form.submit 'Create Todo', class:'btn btn-primary' %>
   </div>
 <% end %>
